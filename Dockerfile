@@ -1,5 +1,8 @@
 FROM python:3.11
 
+ENV PYTHONUNBUFFERED=1
+# insérer pour résoudre un problème de démarrage du serveur web
+
 WORKDIR /app
 
 COPY requirements.txt .
