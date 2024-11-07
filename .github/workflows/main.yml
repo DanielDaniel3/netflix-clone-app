@@ -13,6 +13,6 @@ jobs:
     - uses: actions/checkout@v4
     - name: Connexion par ssh et déploiement de app 
       run: |
-        ssh -i githubactions.pem ubuntu@54.236.217.68 
+        ssh -o StrictHostKeyChecking=no -i githubactions.pem ubuntu@54.236.217.68 
         docker build -t netflix-app:v1 .
         docker run -p 80:8080 netflix-app:v1 
