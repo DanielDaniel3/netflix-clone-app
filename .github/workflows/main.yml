@@ -11,8 +11,15 @@ jobs:
     
     steps:
     - uses: actions/checkout@v4
+
+    - name: Set permissions for SSH key
+      run: chmod 600 githubactions.pem
+
+    - name: Add host to known_hosts
+      run: ssh-keyscan -H 54.236.217.68 >> ~/.ssh/known_hosts
+
     - name: Connexion par ssh et déploiement de app 
       run: |
-        ssh -o StrictHostKeyChecking=no -i githubactions.pem ubuntu@54.236.217.68 
+        ssh -i githubactions.pem ubuntu@54.236.217.68 
         docker build -t netflix-app:v1 .
         docker run -p 80:8080 netflix-app:v1 
